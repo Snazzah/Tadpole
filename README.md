@@ -18,3 +18,6 @@ max : Maximum connections allowed on one Tadpole.
 
 ### If you want Mention Prefixes:
 In the file `tadpole.rb`, simply replace `USER_ID` with the bots User ID.
+
+### If you want to control all commands everywhere:
+In the file `tadpole.rb`, simply replace `158049329150427136` with your User ID.
