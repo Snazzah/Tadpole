@@ -290,41 +290,6 @@ bot.command :connectioninfo do |event, *args|
   bot.execute_command(:cinfo, event, args)
 end
 
-bot.command :endall do |event, *args|
-  if not event.user.id == 158049329150427136 then
-	event << ":no_entry: This command is only for the developer of the bot!"
-  else
-	tp.each do |con2|
-		con = con2[1]
-		con.each do |chn|
-			event.bot.channel(chn.to_i).send_message(HTMLEntities.new.decode("&#x1F4DE;")+" **DISCONNECTED:** *Disconnect by bot developer.*")
-		end
-		holderval = tp.delete(con2[0])
-	end
-	tp = {}
-	tpc = {}
-	IO.write("data/tadpole",tp.to_json)
-	IO.write("data/tadpolecs",tpc.to_json)
-	"Killed all connections."
- end
-end
-
-bot.command :endallopen do |event, *args|
-  if not event.user.id == 158049329150427136 then
-	event << ":no_entry: This command is only for the developer of the bot!"
-  else
-	tp.each do |con2|
-		con = con2[1]
-		if con.length <= 1
-		event.bot.channel(con[0].to_i).send_message(HTMLEntities.new.decode("&#x1F4DE;")+" **DISCONNECTED:** *Disconnect by bot developer.*")
-		holderval = tp.delete(con2[0])
-		end
-	end
-	IO.write("data/tadpole",tp.to_json)
-	"Killed all open connections."
- end
-end
-
 bot.command :join do |event, *args|
 	norole = (event.user.roles.any? { |e| e.name.downcase == 'tadpole operator' })
 	if norole or event.user.id == 158049329150427136 or event.server.owner.id == event.user.id
