@@ -1,4 +1,3 @@
-::RBNACL_LIBSODIUM_GEM_LIB_PATH = "libsodium.dll"
 require 'discordrb'
 require 'json'
 require 'htmlentities'
@@ -164,7 +163,7 @@ bot.command :host do |event, *args|
 		HTMLEntities.new.decode("&#x1F6F0;&#x1F6AB;")+" You already have a connection!"
 	else
 		if not tp.has_key?(key) == nil
-			event << HTMLEntities.new.decode("&#x1F6F0;")+" Started a #{ways}-way connection! **Tadpole ID:** **`"+key+"`**"
+			HTMLEntities.new.decode("&#x1F6F0;")+" Started a #{ways}-way connection! **Tadpole ID:** **`"+key+"`**"
 			tp[key] = [].insert(0, event.channel.id.to_s)
 			tpc[key] = ways
 			holderval = IO.write("data/tadpole",tp.to_json)
@@ -175,7 +174,7 @@ bot.command :host do |event, *args|
 		end
 	end
 	else
-	event << ":no_entry: You need to be server owner or have the role `Tadpole Operator`."
+	":no_entry: You need to be server owner or have the role `Tadpole Operator`."
 	end
 end
 
