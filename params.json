@@ -1,0 +1,6 @@
+{
+  "name": "Tadpole",
+  "tagline": "A Discord bot that connects to multiple channels.",
+  "body": "# Commands\r\n## host\r\n### #tadpole host|make|create\r\nCreates a connection.\r\n\r\n## join\r\n### #tadpole join|connect (tadpole id)\r\nJoins a connection.\r\n\r\n\r\n## end\r\n### #tadpole end|leave|disconnect\r\nDisconnects the channel from the current connection. The connection ends if there were only 2 channels connected.\r\n\r\n## cinfo\r\n### #tadpole cinfo|connectioninfo\r\nDisplays connection info.",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
