@@ -10,7 +10,7 @@ First, install all the dependencies using `bundle install`. Then make a file cal
 TOKEN HERE
 171456123456123456
 ```
-Then, use `ruby botboy.rb` to run it.
+Then, use `ruby tadpole.rb` to run it.
 
 ## Settings and Configuration
 parsebots : Allow bot's messages through Tadpole bot.
