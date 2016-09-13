@@ -27,7 +27,6 @@ module Join
   extend Discordrb::EventContainer
 
   server_create do |event|
-  event.bot.send_message(167106306895773697,":email: OAuth joining #{event.server.name} (#{event.server.id})")
   event.bot.send_message(event.server.id,"Hello! I am Tadpole!
 I can help connect your channel to any other channel that has me!
 If you have any other questions and need support, join this discord server: https://discord.gg/0vjTDaDsgOQWUtlv
@@ -351,6 +350,4 @@ bot.command :pong do |event, *args|
 end
 bot.run :async
 bot.game=("with connections")
-#bot.send_message(167106306895773697,":desktop: Rebooted!")
 bot.sync
-=begin
