@@ -36,33 +36,6 @@ To start, type `#tadpole help` in chat.
 *Thanks!*")
   end
 end
-module Kicked
-  extend Discordrb::EventContainer
-
-  server_delete do |event|
-  event.bot.send_message(167106306895773697,":boot: Kicked from #{event.server.name} (#{event.server.id})")
-  end
-end
-module WArn
-  extend Discordrb::EventContainer
-
-  pm do |event, *args|
-  see = true
-  tp = JSON.parse(open('data/tadpole').read)
-  tp.each do |con2|
-		con = con2[1]
-		if con.include?(event.channel.id.to_s)
-		see = false
-	    end
-  end
-  if see
-  if event.message.content.starts_with?('#tadpole') or event.message.content.starts_with?('<@179161501444079616>') or event.message.content.starts_with?('Tadpole')
-  else
-  event.user.pm(":weary: This is a **bot account**. Please invite using link: #{event.bot.invite_url}" + "&permissions=18432")
-  end
-  end
-  end
-end
 module Tadpole
 	extend Discordrb::EventContainer
 	message do |event|
@@ -125,9 +98,7 @@ module Tadpole
 end
 
 bot.include! Tadpole
-bot.include! WArn
 bot.include! Join
-bot.include! Kicked
 
 tp = JSON.parse(open('data/tadpole').read)
 tpc = JSON.parse(open('data/tadpolecs').read)
