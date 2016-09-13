@@ -17,6 +17,12 @@ bot = Discordrb::Commands::CommandBot.new(token: token, application_id: app_id.t
 # When turned on, any bot account's messages will be sent throught Tadpole.
 @parsebots = false
 
+# The maximum of allowed connections through Tadpole.
+@conlimit = 5
+
+# When turned on, all attachments URLs through Tadpole.
+@allowattach = true
+
 module Join
   extend Discordrb::EventContainer
 
@@ -73,16 +79,16 @@ module Tadpole
 								if event.author.bot_account
 									if @parsebots
 										if not event.channel.private?
-											msg = HTMLEntities.new.decode("&#x1F4E1;")+" *##{event.channel.name}`BOT`* **#{event.author.name}:** #{event.message.content}"
+											msg = HTMLEntities.new.decode("&#x1F4E1;")+" *##{event.channel.name} `BOT`* **#{event.author.name}:** #{event.message.content}"
 										else
-											msg = HTMLEntities.new.decode("&#x1F4E1;")+" **#{event.author.name}`BOT`:** #{event.message.content}"
+											msg = HTMLEntities.new.decode("&#x1F4E1;")+" **#{event.author.name} `BOT`:** #{event.message.content}"
 										end
-										if event.message.attachments.count > 0 #and bot.bot_user.on(chn.server).permission?(:embed_links, chn)
+										if event.message.attachments.count > 0 && @allowattach #and bot.bot_user.on(chn.server).permission?(:embed_links, chn)
 										att = []
 											event.message.attachments.each {|a| att.insert(0, a.url)}
 											msg += " "+HTMLEntities.new.decode("&#x1F5BC;")+"**:** "+att.join(" ")
 										end
-										if msg.length > 2000
+										if msg.length > 1950
 											event.author.mention+", Your last message could not be sent because it hit the character limit!"
 										else
 											chn.send_message(msg)
@@ -150,8 +156,8 @@ bot.command :host do |event, *args|
 	if not args[0].to_i < 2
 		ways = args[0]
 	end
-	if ways > 5
-		ways = 5
+	if ways > @conlimit
+		ways = @conlimit
 	end
 	tp.each do |con2|
 		con = con2[1]
