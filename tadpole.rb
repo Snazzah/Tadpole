@@ -23,6 +23,9 @@ bot = Discordrb::Commands::CommandBot.new(token: token, application_id: app_id.t
 # When turned on, all attachments URLs through Tadpole.
 @allowattach = true
 
+# When turned on, if the user has a nickname, Tadpole will display that as the name instead of only the discord name.
+@usedisplay = false
+
 module Join
   extend Discordrb::EventContainer
 
@@ -53,7 +56,7 @@ module Tadpole
 										if not event.channel.private?
 											msg = HTMLEntities.new.decode("&#x1F4E1;")+" *##{event.channel.name} `BOT`* **#{event.author.name}:** #{event.message.content}"
 										else
-											msg = HTMLEntities.new.decode("&#x1F4E1;")+" **#{event.author.name} `BOT`:** #{event.message.content}"
+											msg = HTMLEntities.new.decode("&#x1F4E1;")+" **#{@usedisplay ? event.author.display_name : event.author.name} `BOT`:** #{event.message.content}"
 										end
 										if event.message.attachments.count > 0 && @allowattach #and bot.bot_user.on(chn.server).permission?(:embed_links, chn)
 										att = []
@@ -68,7 +71,7 @@ module Tadpole
 									end
 								else
 									if not event.channel.private?
-										msg = HTMLEntities.new.decode("&#x1F4E1;")+" *##{event.channel.name}* **#{event.author.name}:** #{event.message.content}"
+										msg = HTMLEntities.new.decode("&#x1F4E1;")+" *##{event.channel.name}* **#{@usedisplay ? event.author.display_name : event.author.name}:** #{event.message.content}"
 									else
 										msg = HTMLEntities.new.decode("&#x1F4E1;")+" **#{event.author.name}:** #{event.message.content}"
 									end
