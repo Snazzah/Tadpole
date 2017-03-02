@@ -1,5 +1,5 @@
 ![BotBoy](https://raw.github.com/SnazzyPine25/Tadpole/master/tadpole-logo.png)
-[![discord](https://img.shields.io/badge/discord-join-7289DA.svg)](https://discord.gg/0vjTDaDsgOQWUtlv)
+[![discord](https://img.shields.io/badge/discord-join-7289DA.svg)](https://discord.gg/bc4CHJw)
 ============
 A bot that connects multiple channels to each other.
 
