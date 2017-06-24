@@ -20,11 +20,14 @@ bot = Discordrb::Commands::CommandBot.new(token: token, application_id: app_id.t
 # The maximum of allowed connections through Tadpole.
 @conlimit = 5
 
-# When turned on, all attachments URLs through Tadpole.
+# Whether to show attachments URLs through Tadpole.
 @allowattach = true
 
 # When turned on, if the user has a nickname, Tadpole will display that as the name instead of only the discord name.
 @usedisplay = false
+
+# Whether to let Tadpole type when a user is typing.
+@cantype = true
 
 module Join
   extend Discordrb::EventContainer
@@ -86,6 +89,30 @@ module Tadpole
 										chn.send_message(msg)
 									end
 								end
+							else
+								tp.delete(chn2)
+								IO.write("data/tadpole",tp.to_json)
+								nil
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	typing do |event|
+		return unless @cantype
+		tp = JSON.parse(open('data/tadpole').read)
+		tp.each do |con2|
+			con = con2[1]
+			if not con[1] == nil
+				if con.include?(event.channel.id.to_s)
+					con.each do |chn|
+						if not chn.to_i == event.channel.id
+							chn2 = chn
+							chn = event.bot.channel(chn.to_i)
+							if not chn == nil
+								chn.start_typing() unless @parsebots && event.author.bot_account
 							else
 								tp.delete(chn2)
 								IO.write("data/tadpole",tp.to_json)
